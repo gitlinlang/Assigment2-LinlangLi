@@ -107,4 +107,14 @@ export class APIHelper {
 
     }
 
+    async editBill(request: APIRequestContext, payload: object) {
+        const response = await request.put(`${this.baseUrl}/Bill/1`, {
+            headers: this.getHeaders(),
+            data: payload
+        });
+        return response;
+
+    }
+
+
 }

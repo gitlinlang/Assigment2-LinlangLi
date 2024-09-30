@@ -96,4 +96,15 @@ test.describe('Test suite Tester Hotel backend', () => {
     expect(bilsResponse.ok()).toBeTruthy();
   });
 
+  test('Test case 10, Edit bill', async ({ request }) => {
+    const payload = generateNewBillPayload();
+    const editBillResponse = await apiHelper.editBill(request, payload);
+    expect(editBillResponse.ok()).toBeTruthy();
+    const responseData = await editBillResponse.json();
+    expect(responseData).toMatchObject({
+      value: payload.value,
+      paid: payload.paid
+    });
+  });
+
 });
