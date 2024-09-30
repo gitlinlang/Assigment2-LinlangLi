@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { APIHelper } from './apiHelper';
 
-
 const BASE_URL = 'http://localhost:3000';
 
 test.describe('Test suite Tester Hotel backend', () => {
@@ -31,4 +30,9 @@ test.describe('Test suite Tester Hotel backend', () => {
 
   });
 
+  test('Test case 03, Get clients', async ({ request }) => {
+    const roomsResponse = await apiHelper.getClients(request);
+    expect(roomsResponse.ok()).toBeTruthy();
+
+  });
 });

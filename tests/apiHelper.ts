@@ -12,6 +12,22 @@ export class APIHelper {
         this.test_password = password;
     }
 
+    // Centralized authPayload creation
+    private getAuthPayload() {
+        return JSON.stringify({
+            username: this.test_username,
+            token: this.token,
+        });
+    }
+
+    // Centralize header generation, using authPayload
+    private getHeaders() {
+        return {
+            'x-user-auth': this.getAuthPayload(),  // Use centralized authPayload
+            'Content-Type': 'application/json',
+        };
+    }
+
     async login(request: APIRequestContext) {
         const response = await request.post(`${this.baseUrl}/api/login`, {
             data: {
@@ -27,19 +43,18 @@ export class APIHelper {
     }
 
     async getRooms(request: APIRequestContext) {
-        const authPayload = JSON.stringify({
-            username: this.test_username,
-            token: this.token
-        })
-
         const response = await request.get(`${this.baseUrl}/rooms`, {
-            headers: {
-                'x-user-auth': authPayload,
-                'Content-Type': 'application/json'
-            }
-        })
+            headers: this.getHeaders(),  // Use centralized headers
+        });
+        return response;
 
-        return response
+    }
+
+    async getClients(request: APIRequestContext) {
+        const response = await request.get(`${this.baseUrl}/clients`, {
+            headers: this.getHeaders(),  // Use centralized headers
+        });
+        return response;
 
     }
 }
