@@ -16,7 +16,6 @@ test.describe('Test suite Tester Hotel backend', () => {
   })
 
   test('Test case 01, login', async ({ request }) => {
-
     const loginResponse = await apiHelper.login(request);
     const loginData = await loginResponse.json();
     expect(loginResponse.ok()).toBeTruthy();
@@ -25,4 +24,11 @@ test.describe('Test suite Tester Hotel backend', () => {
     });
 
   });
+
+  test('Test case 02, Get rooms', async ({ request }) => {
+    const roomsResponse = await apiHelper.getRooms(request);
+    expect(roomsResponse.ok()).toBeTruthy();
+
+  });
+
 });

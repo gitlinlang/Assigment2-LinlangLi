@@ -4,7 +4,7 @@ export class APIHelper {
     private baseUrl: string;
     private test_username: string;
     private test_password: string;
-    private token: string;
+    private token: string | null = null;
 
     constructor(baseUrl: string, username: string, password: string) {
         this.baseUrl = baseUrl;
@@ -21,6 +21,23 @@ export class APIHelper {
         })
         const responseData = await response.json();
         this.token = responseData.token;
+
+        return response
+
+    }
+
+    async getRooms(request: APIRequestContext) {
+        const authPayload = JSON.stringify({
+            username: this.test_username,
+            token: this.token
+        })
+
+        const response = await request.get(`${this.baseUrl}/rooms`, {
+            headers: {
+                'x-user-auth': authPayload,
+                'Content-Type': 'application/json'
+            }
+        })
 
         return response
 
