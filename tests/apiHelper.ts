@@ -92,4 +92,13 @@ export class APIHelper {
 
     }
 
+    async newBill(request: APIRequestContext, payload: object) {
+        const response = await request.post(`${this.baseUrl}/bill/new`, {
+            headers: this.getHeaders(),
+            data: payload
+        });
+        return response;
+
+    }
+
 }

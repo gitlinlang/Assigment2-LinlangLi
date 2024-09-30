@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { APIHelper } from './apiHelper';
-import { generateNewClientPayload } from './testData';
+import { generateNewClientPayload, generateNewBillPayload } from './testData';
 const BASE_URL = 'http://localhost:3000/api';
 
 test.describe('Test suite Tester Hotel backend', () => {
@@ -78,4 +78,18 @@ test.describe('Test suite Tester Hotel backend', () => {
     expect(bilsResponse.ok()).toBeTruthy();
 
   });
+
+  test('Test case 08, New bill', async ({ request }) => {
+    const payload = generateNewBillPayload();
+    const newBillResponse = await apiHelper.newBill(request, payload);
+    expect(newBillResponse.ok()).toBeTruthy();
+    const responseData = await newBillResponse.json();
+    expect(responseData).toHaveProperty('id');
+    expect(responseData).toMatchObject({
+      value: payload.value
+
+    });
+
+  });
+
 });
