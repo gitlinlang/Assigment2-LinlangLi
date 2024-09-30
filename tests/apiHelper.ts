@@ -57,4 +57,13 @@ export class APIHelper {
         return response;
 
     }
+
+    async newClient(request: APIRequestContext, payload: object) {
+        const response = await request.post(`${this.baseUrl}/api/client/new`, {
+            headers: this.getHeaders(),
+            data: payload
+        });
+        return response;
+
+    }
 }
