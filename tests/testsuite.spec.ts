@@ -72,4 +72,10 @@ test.describe('Test suite Tester Hotel backend', () => {
     expect(deleteRequest.ok()).toBeTruthy();
 
   });
+
+  test('Test case 07, Get bills', async ({ request }) => {
+    const bilsResponse = await apiHelper.getBills(request);
+    expect(bilsResponse.ok()).toBeTruthy();
+
+  });
 });

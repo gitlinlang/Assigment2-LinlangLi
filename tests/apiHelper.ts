@@ -83,4 +83,13 @@ export class APIHelper {
         });
         return response
     }
+
+    async getBills(request: APIRequestContext) {
+        const response = await request.get(`${this.baseUrl}/bills`, {
+            headers: this.getHeaders(),
+        });
+        return response;
+
+    }
+
 }
