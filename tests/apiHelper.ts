@@ -75,4 +75,12 @@ export class APIHelper {
         return response;
 
     }
+
+    async deleteClient(request: APIRequestContext, clientId: number) {
+        const response = await request.delete(`${this.baseUrl}/client/${clientId}`, {
+            headers: this.getHeaders(),
+
+        });
+        return response
+    }
 }

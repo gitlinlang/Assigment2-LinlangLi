@@ -31,8 +31,8 @@ test.describe('Test suite Tester Hotel backend', () => {
   });
 
   test('Test case 03, Get clients', async ({ request }) => {
-    const roomsResponse = await apiHelper.getClients(request);
-    expect(roomsResponse.ok()).toBeTruthy();
+    const clientsResponse = await apiHelper.getClients(request);
+    expect(clientsResponse.ok()).toBeTruthy();
 
   });
 
@@ -60,6 +60,16 @@ test.describe('Test suite Tester Hotel backend', () => {
       email: payload.email,
       telephone: payload.telephone
     });
+
+  });
+
+  test('Test case 06 - delete client', async ({ request }) => {
+    const getAllClients = await apiHelper.getClients(request);
+    expect(getAllClients.ok()).toBeTruthy();
+    const getClient = await getAllClients.json();
+    const lastButOneID = getClient[getClient.length - 2].id;
+    const deleteRequest = await apiHelper.deleteClient(request, lastButOneID);
+    expect(deleteRequest.ok()).toBeTruthy();
 
   });
 });
