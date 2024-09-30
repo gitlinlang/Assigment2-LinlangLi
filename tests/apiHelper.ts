@@ -89,13 +89,19 @@ export class APIHelper {
             headers: this.getHeaders(),
         });
         return response;
-
     }
 
     async newBill(request: APIRequestContext, payload: object) {
         const response = await request.post(`${this.baseUrl}/bill/new`, {
             headers: this.getHeaders(),
             data: payload
+        });
+        return response;
+    }
+
+    async getReservations(request: APIRequestContext) {
+        const response = await request.get(`${this.baseUrl}/reservations`, {
+            headers: this.getHeaders(),
         });
         return response;
 

@@ -89,7 +89,11 @@ test.describe('Test suite Tester Hotel backend', () => {
       value: payload.value
 
     });
+  });
 
+  test('Test case 09, Get Reservations', async ({ request }) => {
+    const bilsResponse = await apiHelper.getReservations(request);
+    expect(bilsResponse.ok()).toBeTruthy();
   });
 
 });
