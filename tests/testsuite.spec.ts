@@ -12,7 +12,17 @@ test.describe('Test suite Tester Hotel backend', () => {
     const loginResponse = await apiHelper.login(request);
     expect(loginResponse.ok()).toBeTruthy();
     const loginData = await loginResponse.json();
-
+    expect(loginData).toHaveProperty('token');
   })
 
+  test('Test case 01, login', async ({ request }) => {
+
+    const loginResponse = await apiHelper.login(request);
+    const loginData = await loginResponse.json();
+    expect(loginResponse.ok()).toBeTruthy();
+    expect(loginData).toMatchObject({
+      username: `${process.env.TEST_USERNAME}`
+    });
+
+  });
 });

@@ -13,7 +13,7 @@ export class APIHelper {
     }
 
     async login(request: APIRequestContext) {
-        const response = await request.post(`${this.baseUrl}/login`, {
+        const response = await request.post(`${this.baseUrl}/api/login`, {
             data: {
                 username: this.test_username,
                 password: this.test_password,
