@@ -6,4 +6,4 @@ export const generateNewClientPayload = () => {
         "email": faker.internet.email(),
         "telephone": faker.phone.number(),
     }
-}
+};

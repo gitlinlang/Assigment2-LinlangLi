@@ -29,7 +29,7 @@ export class APIHelper {
     }
 
     async login(request: APIRequestContext) {
-        const response = await request.post(`${this.baseUrl}/api/login`, {
+        const response = await request.post(`${this.baseUrl}/login`, {
             data: {
                 username: this.test_username,
                 password: this.test_password,
@@ -52,14 +52,23 @@ export class APIHelper {
 
     async getClients(request: APIRequestContext) {
         const response = await request.get(`${this.baseUrl}/clients`, {
-            headers: this.getHeaders(),  // Use centralized headers
+            headers: this.getHeaders(),
         });
         return response;
 
     }
 
     async newClient(request: APIRequestContext, payload: object) {
-        const response = await request.post(`${this.baseUrl}/api/client/new`, {
+        const response = await request.post(`${this.baseUrl}/client/new`, {
+            headers: this.getHeaders(),
+            data: payload
+        });
+        return response;
+
+    }
+
+    async editClient(request: APIRequestContext, payload: object) {
+        const response = await request.put(`${this.baseUrl}/client/2`, {
             headers: this.getHeaders(),
             data: payload
         });

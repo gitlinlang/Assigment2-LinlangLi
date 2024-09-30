@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { APIHelper } from './apiHelper';
 import { generateNewClientPayload } from './testData';
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://localhost:3000/api';
 
 test.describe('Test suite Tester Hotel backend', () => {
   let apiHelper: APIHelper;
@@ -42,6 +42,19 @@ test.describe('Test suite Tester Hotel backend', () => {
     expect(newClientResponse.ok()).toBeTruthy();
     const responseData = await newClientResponse.json();
     expect(responseData).toHaveProperty('id');
+    expect(responseData).toMatchObject({
+      name: payload.name,
+      email: payload.email,
+      telephone: payload.telephone
+    });
+
+  });
+
+  test('Test case 05, edit client', async ({ request }) => {
+    const payload = generateNewClientPayload();
+    const editClientResponse = await apiHelper.editClient(request, payload);
+    expect(editClientResponse.ok()).toBeTruthy();
+    const responseData = await editClientResponse.json();
     expect(responseData).toMatchObject({
       name: payload.name,
       email: payload.email,
