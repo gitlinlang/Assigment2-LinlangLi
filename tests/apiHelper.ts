@@ -68,7 +68,7 @@ export class APIHelper {
     }
 
     async editClient(request: APIRequestContext, payload: object) {
-        const response = await request.put(`${this.baseUrl}/client/2`, {
+        const response = await request.put(`${this.baseUrl}/client/1`, {
             headers: this.getHeaders(),
             data: payload
         });
